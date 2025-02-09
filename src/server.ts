@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/mysql2';
-import { usersTable } from '../schema';
+import { usersTable } from './db/schema';
+
 
 
 const db = drizzle(process.env.DATABASE_URL!, { logger: true });
