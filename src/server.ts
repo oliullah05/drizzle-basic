@@ -1,1 +1,0 @@
-console.log("object dd dsdf zs");
