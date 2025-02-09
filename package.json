@@ -5,7 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn src/server.ts",
-    "genarate":"npx drizzle-kit generate"
+    "genarate":"npx drizzle-kit generate",
+    "migrate":"npx drizzle-kit migrate",
+    "db:update":"npx drizzle-kit push",
+    "studio":"npx drizzle-kit studio"
   },
   "keywords": [],
   "author": "",
