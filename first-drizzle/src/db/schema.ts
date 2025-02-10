@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import { boolean, int, mysqlEnum, mysqlTable, serial, unique, uniqueIndex, varchar, foreignKey, float, timestamp, primaryKey } from 'drizzle-orm/mysql-core';
 
 export const RoleEnum = mysqlEnum("userRole", ["admin", "user"]).notNull().default("user");
@@ -10,7 +11,7 @@ export const usersTable = mysqlTable('users', {
   role: RoleEnum
 }, table => ({
   emailIndex: uniqueIndex("emailIndex").on(table.email),
-  uniqueNameAndAge: unique("uniqueNameAndAge").on(table.name, table.age)
+  // uniqueNameAndAge: unique("uniqueNameAndAge").on(table.name, table.age)
 }));
 
 export const userPreferencesTable = mysqlTable("userPreferences", {
@@ -41,6 +42,19 @@ export const postCategory = mysqlTable("postCategory", {
 export const categoryTable = mysqlTable("category",{
   id:serial().primaryKey().notNull(),
   name:varchar({length:255}).notNull()
+})
+
+
+
+
+
+
+// relations
+export const userTableRelation = relations(usersTable,({one,many})=>{
+  return {
+    preference: one(userPreferencesTable),
+    posts:many(postTable)
+  }
 })
 
 

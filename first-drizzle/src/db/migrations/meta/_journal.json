@@ -15,6 +15,13 @@
       "when": 1739170192736,
       "tag": "0001_nasty_zaran",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1739171289350,
+      "tag": "0002_sparkling_molecule_man",
+      "breakpoints": true
     }
   ]
 }
