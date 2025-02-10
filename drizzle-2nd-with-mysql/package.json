@@ -1,0 +1,29 @@
+{
+  "name": "drizzle-2nd-with-mysql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsnd --respawn src/server.ts",
+    "genarate": "npx drizzle-kit generate",
+    "migrate": "npx drizzle-kit migrate",
+    "db:update": "npx drizzle-kit push",
+    "studio": "npx drizzle-kit studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.2",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3"
+  }
+}
