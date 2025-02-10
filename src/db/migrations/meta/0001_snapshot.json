@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "805538b9-33b0-4bf9-b954-f6152b865e1e",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "2979b85a-65a9-4a11-9536-759041ed9857",
+  "prevId": "805538b9-33b0-4bf9-b954-f6152b865e1e",
   "tables": {
     "category": {
       "name": "category",
@@ -83,11 +83,11 @@
         }
       },
       "compositePrimaryKeys": {
-        "postCategory_categoryId_postId_pk": {
-          "name": "postCategory_categoryId_postId_pk",
+        "postCategory_postId_categoryId_pk": {
+          "name": "postCategory_postId_categoryId_pk",
           "columns": [
-            "categoryId",
-            "postId"
+            "postId",
+            "categoryId"
           ]
         }
       },
@@ -137,10 +137,10 @@
         },
         "authorId": {
           "name": "authorId",
-          "type": "int",
+          "type": "serial",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": true
         }
       },
       "indexes": {},

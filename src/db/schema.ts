@@ -1,4 +1,4 @@
-import { boolean, int, mysqlEnum, mysqlTable, serial, unique, uniqueIndex, varchar, foreignKey, float, timestamp } from 'drizzle-orm/mysql-core';
+import { boolean, int, mysqlEnum, mysqlTable, serial, unique, uniqueIndex, varchar, foreignKey, float, timestamp, primaryKey } from 'drizzle-orm/mysql-core';
 
 export const RoleEnum = mysqlEnum("userRole", ["admin", "user"]).notNull().default("user");
 
@@ -21,12 +21,27 @@ export const userPreferencesTable = mysqlTable("userPreferences", {
 });
 
 
-export const postTable = mysqlTable("post",{
-  id:serial().notNull().primaryKey(),
-  title: varchar({length:255}).notNull(),
-  avarageRatting:float().default(0).notNull(),
-  createdAt:timestamp().defaultNow(),
-  updatedAt:timestamp().defaultNow(),
-  authorId:int().references(()=>usersTable.id).notNull()
+export const postTable = mysqlTable("post", {
+  id: serial().notNull().primaryKey(),
+  title: varchar({ length: 255 }).notNull(),
+  avarageRatting: float().default(0).notNull(),
+  createdAt: timestamp().defaultNow(),
+  updatedAt: timestamp().defaultNow(),
+  authorId: serial().notNull().references(() => usersTable.id)
+});
+
+
+export const postCategory = mysqlTable("postCategory", {
+  postId: int().references(() => postTable.id).notNull(), 
+  categoryId: int().references(() => categoryTable.id).notNull(), 
+}, table => ({
+  pk: primaryKey({ columns: [table.postId, table.categoryId] }) // Corrected
+}));
+
+export const categoryTable = mysqlTable("category",{
+  id:serial().primaryKey().notNull(),
+  name:varchar({length:255}).notNull()
 })
+
+
  

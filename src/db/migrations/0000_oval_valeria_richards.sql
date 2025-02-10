@@ -1,3 +1,15 @@
+CREATE TABLE `category` (
+	`id` serial AUTO_INCREMENT NOT NULL,
+	`name` varchar(255) NOT NULL,
+	CONSTRAINT `category_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
+CREATE TABLE `postCategory` (
+	`postId` int NOT NULL,
+	`categoryId` int NOT NULL,
+	CONSTRAINT `postCategory_categoryId_postId_pk` PRIMARY KEY(`categoryId`,`postId`)
+);
+--> statement-breakpoint
 CREATE TABLE `post` (
 	`id` serial AUTO_INCREMENT NOT NULL,
 	`title` varchar(255) NOT NULL,
@@ -26,5 +38,7 @@ CREATE TABLE `users` (
 	CONSTRAINT `emailIndex` UNIQUE(`email`)
 );
 --> statement-breakpoint
+ALTER TABLE `postCategory` ADD CONSTRAINT `postCategory_postId_post_id_fk` FOREIGN KEY (`postId`) REFERENCES `post`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `postCategory` ADD CONSTRAINT `postCategory_categoryId_category_id_fk` FOREIGN KEY (`categoryId`) REFERENCES `category`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `post` ADD CONSTRAINT `post_authorId_users_id_fk` FOREIGN KEY (`authorId`) REFERENCES `users`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `userPreferences` ADD CONSTRAINT `userPreferences_userId_users_id_fk` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE no action ON UPDATE no action;
