@@ -1,20 +1,35 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/mysql2';
-import { eq } from 'drizzle-orm';
-import { usersTable } from './db/schema';
-  
-const db = drizzle(process.env.DATABASE_URL!);
-async function main() {
+import { Database, usersTable } from './db/schema';
+import * as schema from './db/schema';
+import mysql from "mysql2/promise";
 
-    const filter = await db
-    .select()
-    .from(usersTable)
-    .where(eq(usersTable.age, 31));
-
-// find user
-const insertUser = await db
-  .select()
-  .from(usersTable)
-  .where(eq(usersTable.age, 31))
+// Create MySQL connection
+async function createConnection() {
+  return mysql.createConnection({
+    uri: process.env.DATABASE_URL!,
+  });
 }
+
+// Initialize Drizzle inside an async function
+async function initializeDb() {
+  const connection = await createConnection();
+  return drizzle(connection, { schema, mode: 'default' });
+}
+
+// Main function to interact with DB
+async function main() {
+  try {
+    const db = await initializeDb(); 
+    console.log("Database connected");
+
+    // Example query
+    const users = await db.query.usersTable.findMany();
+    console.log({ users });
+
+  } catch (err) {
+    console.error("Database operation failed:", err);
+  }
+}
+
 main();

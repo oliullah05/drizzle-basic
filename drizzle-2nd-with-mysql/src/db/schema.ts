@@ -5,3 +5,7 @@ export const usersTable = mysqlTable('users_table', {
   age: int().notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
 });
+
+export type Database = {
+  usersTable: typeof usersTable;
+};
